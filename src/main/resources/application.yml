@@ -1,0 +1,21 @@
+###################### GENERAL ####################
+###################################################
+spring:
+  profiles:
+    active: dev
+  application:
+    name: myapp_demo
+
+server:
+  port: ${vcap.application.port:8081}
+
+---
+###################################################
+#### PROFILE PROD ##################################
+spring:
+  profiles: prod
+  application:
+    name: myapp_demo
+
+server:
+  port: ${vcap.application.port:${port}}
