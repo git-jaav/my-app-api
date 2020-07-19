@@ -19,7 +19,7 @@ spring:
     name: myapp_demo
 
 server:
-  port: ${vcap.application.port:${port}}
+  port: ${vcap.application.port:${PORT}}
 
 ---
 ###################################################
@@ -56,7 +56,7 @@ management:
       external-file: logs-api/api-myapp-demo.log
 
 server:
-  port: ${vcap.application.port:${port}}
+  port: ${vcap.application.port:${PORT}}
 
 ---
 ###################################################
