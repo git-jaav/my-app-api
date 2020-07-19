@@ -1,6 +1,5 @@
 package com.jaav.sys.myappapi.controller.api;
 
-import com.jaav.sys.myappapi.model.ProccesEntity;
 import com.jaav.sys.myappapi.utils.Constant;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,7 +17,7 @@ import java.util.Date;
 public class StatusController {
 
 	@GetMapping(value = "verify" ,
-			produces = {MediaType.APPLICATION_JSON_VALUE},
+			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE )
 	@ApiOperation(value = "Verificar estado API" ,
 			produces = MediaType.APPLICATION_JSON_VALUE,

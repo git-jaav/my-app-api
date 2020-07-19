@@ -2,6 +2,8 @@ package com.jaav.sys.myappapi.config;
 
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -20,50 +22,34 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig extends Docket{
+public class SwaggerConfig{
 
-    //@Autowired DocketConfigProperties docketConfigProperties;
+    @Autowired
+    ApplicationProperties applicationProperties;
 
-    //@Value("${swagger.info.title}")
-    private String title = "SPRING BOOT - MYAPP-DEMO";
 
-    //@Value("${swagger.info.description}")
-    private String description = "Spring Boot REST API - MYAPP-DEMO";
-
-    /**
-     *  Constructor por defecto.... inicializara con la app
-     */
-    public SwaggerConfig() {
-        super(DocumentationType.SWAGGER_2);
-        this
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.regex("/api.*"))
                 .build()
                 .apiInfo(metaData());
-
     }
+
 
     private ApiInfo metaData() {
         ApiInfo apiInfo = new ApiInfo(
-                title,
-                description,
-                "1.0",
+                applicationProperties.getTitle(),
+                applicationProperties.getDescription(),
+                applicationProperties.getVersion(),
                 "Terminos del servicio",
-                new Contact("José Alfonso Arauco Villar - JAAV",
-                        "http://localhost:8081",
-                        "araucovillar@gmail.com"),
+                new Contact(applicationProperties.getContactName(),
+                        applicationProperties.getContactUrl(),
+                        applicationProperties.getContactEmail()),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0",  Collections.emptyList());
-
-//        apiInfo.getTitle();
-//        apiInfo.getDescription();
-//        apiInfo.getVersion();
-//        apiInfo.getTermsOfServiceUrl();
-//        apiInfo.getContact();
-//        apiInfo.getLicense();
-//        apiInfo.getLicenseUrl();
-
         return apiInfo;
     }
 }

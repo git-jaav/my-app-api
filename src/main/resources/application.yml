@@ -1,13 +1,14 @@
 ###################### GENERAL ####################
 ###################################################
-spring:
-  profiles:
-    active: dev
-  application:
-    name: myapp_demo
-
-server:
-  port: ${vcap.application.port:8081}
+swagger:
+  info:
+    title: API DEMO
+    description: Api de rpueba basada en Spring boot
+    version: 1.0.0
+    contact:
+      name: José Alfonso Arauco Villar - JAAV
+      url: localhost:8080
+      email: araucovillar@gmail.com
 
 ---
 ###################################################
@@ -19,3 +20,52 @@ spring:
 
 server:
   port: ${vcap.application.port:${port}}
+
+---
+###################################################
+#### PROFILE PROD - ADMIN BOOT ##################################
+spring:
+  profiles: prod_ab
+  application:
+    name: myapp_demo
+
+  boot:
+    admin:
+      client:
+        url: ${ADMINBOOT_CLIENT_URL}
+        username: ${ADMINBOOT_CLIENT_USER}
+        password: ${ADMINBOOT_CLIENT_PASSWORD}
+
+        instance:
+          management-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator
+          health-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator/health
+          service-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/
+
+logging:
+  file: logs-api/api-myapp-demo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+    logfile:
+      external-file: logs-api/api-myapp-demo.log
+
+server:
+  port: ${vcap.application.port:${port}}
+
+---
+###################################################
+###################### PROFILE DEV ####################
+###################################################
+spring:
+  profiles: dev
+  application:
+    name: myapp_demo
+
+server:
+  port: ${vcap.application.port:8088}
