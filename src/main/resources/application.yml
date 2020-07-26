@@ -36,10 +36,10 @@ spring:
         username: ${ADMINBOOT_CLIENT_USER}
         password: ${ADMINBOOT_CLIENT_PASSWORD}
 
-        instance:
-          management-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator
-          health-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator/health
-          service-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/
+        #instance:
+          #management-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator
+          #health-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator/health
+          #service-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/
 
 logging:
   file: logs-api/api-myapp-demo

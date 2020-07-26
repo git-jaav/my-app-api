@@ -13,7 +13,7 @@ import java.util.Date;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/status")
+@RequestMapping("/status")
 public class StatusController {
 
 	@GetMapping(value = "verify" ,
