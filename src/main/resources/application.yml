@@ -10,6 +10,10 @@ swagger:
       url: localhost:8080
       email: araucovillar@gmail.com
 
+spring:
+  profiles:
+    active: dev
+
 ---
 ###################################################
 #### PROFILE PROD ##################################
@@ -17,6 +21,41 @@ spring:
   profiles: prod
   application:
     name: myapp_demo
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        naming_strategy:  org.hibernate.cfg.DefaultNamingStrategy
+        show_sql: false
+        format_sql: true
+        packagesToScan: com.jaav.sys
+        id:
+          new_generator_mappings: false
+
+    hibernate:
+      ddl-auto: none
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://${HOST_DB}:${PORT_DB}/${DATABASE}?useUnicode=true&characterEncoding=utf8&useSSL=false&requireSSL=false
+    url: jdbc:mysql://${HOST_DB}:${PORT_DB}/${DATABASE}?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=GMT
+    username: ${USERNAME_DB}
+    password: ${PASSWORD_DB}
+    #Tunear parametros para reconección y tiempo fuera de conexión
+    testOnBorrow: true
+    #removeAbandonedTimeout: 1800
+    #removeAbandoned: true
+    validation-query: SELECT 1
+    logAbandoned: true
+    validation-query-timeout: 30000
+    minEvictableIdleTimeMillis: 60000
+    maxWait: 60000
+    maxIdle: 1
+    minIdle: 0
+    maxActive: 50
+    initialSize: 1
+    test-on-connect: true
 
 server:
   port: ${vcap.application.port:${PORT}}
@@ -40,6 +79,41 @@ spring:
           #management-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator
           #health-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator/health
           #service-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        naming_strategy:  org.hibernate.cfg.DefaultNamingStrategy
+        show_sql: false
+        format_sql: true
+        packagesToScan: com.jaav.sys
+        id:
+          new_generator_mappings: false
+
+    hibernate:
+      ddl-auto: none
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://${HOST_DB}:${PORT_DB}/${DATABASE}?useUnicode=true&characterEncoding=utf8&useSSL=false&requireSSL=false
+    url: jdbc:mysql://${HOST_DB}:${PORT_DB}/${DATABASE}?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=GMT
+    username: ${USERNAME_DB}
+    password: ${PASSWORD_DB}
+    #Tunear parametros para reconección y tiempo fuera de conexión
+    testOnBorrow: true
+    #removeAbandonedTimeout: 1800
+    #removeAbandoned: true
+    validation-query: SELECT 1
+    logAbandoned: true
+    validation-query-timeout: 30000
+    minEvictableIdleTimeMillis: 60000
+    maxWait: 60000
+    maxIdle: 1
+    minIdle: 0
+    maxActive: 50
+    initialSize: 1
+    test-on-connect: true
 
 logging:
   file: logs-api/api-myapp-demo
@@ -66,6 +140,30 @@ spring:
   profiles: dev
   application:
     name: myapp_demo
+
+  jpa:
+    properties:
+      hibernate:
+        #dialect: org.hibernate.dialect.MySQLDialect
+        #dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        naming_strategy:  org.hibernate.cfg.DefaultNamingStrategy
+        show_sql: true
+        format_sql: true
+        packagesToScan: com.jaav.sys
+        id:
+          new_generator_mappings: false
+
+    hibernate:
+      ddl-auto: none
+  datasource:
+    #driverClassName: com.mysql.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://localhost:3306/yimpu_demo?useUnicode=true&characterEncoding=utf8&useSSL=false&requireSSL=false
+    url: jdbc:mysql://localhost:3306/mini_encuesta?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=GMT
+    username: root
+    password: 1234
 
 server:
   port: ${vcap.application.port:8088}
