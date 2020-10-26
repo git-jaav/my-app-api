@@ -33,6 +33,7 @@ pipeline {
         GIT_CREDENCTIAL_ID = "git-jaav"
         //GIT_ORIGIN_REPOSITORY = "https://github.com/git-jaav/my-app-api.git --branch develop"
         ARTIFACT_NAME = "my-app-api"
+	ARTIFACT_NAME_II = determineRepoName()
         DOCKER_HUB_USER = "dockerjaav"
         SSH_SECRET_FILE = "aws-ec2-secret"
         //PATH_JENKINS_WS = "${JENKINS_HOME}\\workspace\\"
@@ -66,7 +67,7 @@ pipeline {
                         script {
                             GIT_ORIGIN_REPO =  determineRepo()
                             GIT_ORIGIN_BRANCH =  getGitBranchName()
-                            ULTIMO_PASO = "Iniciando clone out de última versión del repositorio GIT: ${GIT_ORIGIN_REPO} --branch ${GIT_ORIGIN_REPO} ..."
+			    ULTIMO_PASO = "Artefacto: ${ARTIFACT_NAME_II}. Iniciando clone out de última versión del repositorio GIT: ${GIT_ORIGIN_REPO} --branch ${GIT_ORIGIN_BRANCH} ... "
                             echo ULTIMO_PASO
                             def resultSH = getCommandOutput("git config --global credential.username {GIT_USERNAME}")
                             echo resultSH
