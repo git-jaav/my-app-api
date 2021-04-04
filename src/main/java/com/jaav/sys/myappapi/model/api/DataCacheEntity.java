@@ -6,19 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProcessEntity implements Serializable {
+public class DataCacheEntity implements Serializable {
 
-    private String proccesName;
-
+    private String name;
+    private String email;
     private String status;
-
-    private Integer countOk;
-
-    private Integer countError;
+    private String formatedDateRegister;
 
 }

@@ -67,5 +67,11 @@ spring:
   application:
     name: myapp_demo
 
+  cache:
+    type: redis
+  redis:
+    host: ${CACHE_HOST}
+    port: ${CACHE_PORT}
+    password: ${CACHE_PASSWORD}
 server:
   port: ${vcap.application.port:8088}
