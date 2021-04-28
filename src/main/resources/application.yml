@@ -3,13 +3,25 @@
 swagger:
   info:
     title: API DEMO
-    description: Api de rpueba basada en Spring boot
+    description: Api de prueba basada en Spring boot
     version: 1.0.0
     contact:
       name: José Alfonso Arauco Villar - JAAV
       url: localhost:8080
       email: araucovillar@gmail.com
 
+---
+###################################################
+#### PROFILE PROD ##################################
+spring:
+  profiles: prod
+  application:
+    name: myapp_demo
+
+server:
+  port: ${vcap.application.port:${PORT}}
+
+---
 ###################################################
 ###################### PROFILE DEV ####################
 ###################################################
