@@ -1,23 +1,55 @@
 package com.jaav.sys.myappapi.service.impl;
 
-import com.jaav.sys.myappapi.model.api.ProcessEntity;
+import com.jaav.sys.myappapi.model.api.TipoCambioRequest;
+import com.jaav.sys.myappapi.model.api.TipoCambioResponse;
 import com.jaav.sys.myappapi.service.ProcessService;
+import com.jaav.sys.myappapi.utils.Constant;
 import org.springframework.stereotype.Service;
+import rx.Single;
 
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Service
 public class ProcessServiceImpl implements ProcessService {
 
-    @Override
-    public List<ProcessEntity> executeProcess(String type) {
 
-        String proceso = "PROC_X";
-        return Arrays.asList(
-                new ProcessEntity("PROC_X01","OK",10,0),
-                new ProcessEntity("PROC_X02","OK",2,0),
-                new ProcessEntity("PROC_X03","OK",4,6)
-        );
+    @Override
+    public Single<TipoCambioResponse>
+        executeProcess(TipoCambioRequest TipoCambioRq) {
+        return Single.zip(Single.just(TipoCambioRq) , getCurrentTipoCambio(),
+                (rq, tipoCambio) -> {
+                    if (Constant.TIPO_MONEDA_SOL.equalsIgnoreCase(rq.getTipoMonedaOrigen())) {
+                        return new TipoCambioResponse(
+                                rq.getMonto(), rq.getMonto().divide(tipoCambio, 4),
+                                rq.getTipoMonedaOrigen(),
+                                rq.getTipoMonedaDestino(),
+                                tipoCambio);
+                    } else if (Constant.TIPO_MONEDA_DOL.equalsIgnoreCase(rq.getTipoMonedaOrigen())) {
+                        return new TipoCambioResponse(
+                                rq.getMonto(), rq.getMonto().multiply(tipoCambio),
+                                rq.getTipoMonedaOrigen(),
+                                rq.getTipoMonedaDestino(),
+                                tipoCambio
+                        );
+                    } else {
+                        return new TipoCambioResponse(
+                                rq.getMonto(), rq.getMonto(),
+                                rq.getTipoMonedaOrigen(),
+                                rq.getTipoMonedaDestino(),
+                                tipoCambio
+                                );
+                    }
+                });
+
     }
+
+
+    /***
+     *  tipo de cambio Actual**
+     * @return
+     */
+    private Single<BigDecimal> getCurrentTipoCambio() {
+        return Single.just(BigDecimal.valueOf(3.84));
+    }
+
 }

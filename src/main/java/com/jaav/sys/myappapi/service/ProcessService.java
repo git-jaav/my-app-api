@@ -1,10 +1,11 @@
 package com.jaav.sys.myappapi.service;
 
-import com.jaav.sys.myappapi.model.api.ProcessEntity;
+import com.jaav.sys.myappapi.model.api.TipoCambioRequest;
+import com.jaav.sys.myappapi.model.api.TipoCambioResponse;
+import rx.Single;
 
-import java.util.List;
 
 public interface ProcessService {
 
-    List<ProcessEntity> executeProcess(String type);
+    Single<TipoCambioResponse> executeProcess(TipoCambioRequest TipoCambioRq);
 }

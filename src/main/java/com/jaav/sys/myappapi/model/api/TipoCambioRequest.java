@@ -5,18 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProcessEntity {
+public class TipoCambioRequest{
 
-    private String proccesName;
-
-    private String status;
-
-    private Integer countOk;
-
-    private Integer countError;
+    private BigDecimal monto;
+    private String tipoMonedaOrigen;
+    private String tipoMonedaDestino;
 
 }
