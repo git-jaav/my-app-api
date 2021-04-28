@@ -2,6 +2,7 @@ package com.jaav.sys.myappapi.service.impl;
 
 import com.jaav.sys.myappapi.model.api.TipoCambioRequest;
 import com.jaav.sys.myappapi.model.api.TipoCambioResponse;
+import com.jaav.sys.myappapi.model.api.TipoCambioUpdateRequest;
 import com.jaav.sys.myappapi.model.entities.TipoCambioEntity;
 import com.jaav.sys.myappapi.repository.TipoCambioRepository;
 import com.jaav.sys.myappapi.service.ProcessService;
@@ -50,6 +51,23 @@ public class ProcessServiceImpl implements ProcessService {
                     }
                 });
 
+    }
+
+    @Override
+    public Single<Boolean> updateTipoCambio(TipoCambioUpdateRequest updateRq) {
+
+        TipoCambioEntity result = tipoCambioRepository.findByTagDate(updateRq.getFormatoFechaDia());
+        if (Optional.ofNullable(result).isPresent()) {
+            result.setExchangeRate(updateRq.getTipoCambio());
+            tipoCambioRepository.save(result);
+        } else {
+            result = new TipoCambioEntity();
+            result.setExchangeRate(updateRq.getTipoCambio());
+            result.setStatus("ENABLED");
+            result.setTagDate(updateRq.getFormatoFechaDia());
+            tipoCambioRepository.save(result);
+        }
+        return Single.just(Boolean.TRUE);
     }
 
 
