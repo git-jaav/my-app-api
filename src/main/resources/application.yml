@@ -15,7 +15,7 @@ swagger:
 #### PROFILE PROD ##################################
 application:
   process:
-    name: ${ADMINBOOT_CLIENT_URL:PROCESS_DEFAULT}
+    name: ${PROCESS_NAME:PROCESS_DEFAULT}
 
 spring:
   profiles: prod
@@ -30,7 +30,7 @@ server:
 #### PROFILE PROD - ADMIN BOOT ##################################
 application:
   process:
-    name: ${ADMINBOOT_CLIENT_URL:PROCESS_DEFAULT}
+    name: ${PROCESS_NAME:PROCESS_DEFAULT}
 
 spring:
   profiles: prod_ab
@@ -72,7 +72,7 @@ server:
 ###################################################
 application:
   process:
-    name: ${ADMINBOOT_CLIENT_URL:PROCESS_DEFAULT}
+    name: ${PROCESS_NAME:PROCESS_DEFAULT}
 
 spring:
   profiles: dev
