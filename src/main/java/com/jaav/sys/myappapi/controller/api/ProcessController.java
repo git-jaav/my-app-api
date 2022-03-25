@@ -20,7 +20,7 @@ import java.util.List;
  * @author JAAV
  */
 @RestController
-@RequestMapping("/api/channel/sys/v1/process")
+@RequestMapping("/api/sys/v1/process")
 public class ProcessController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProcessController.class);
@@ -29,8 +29,7 @@ public class ProcessController {
     ProcessService processService;
 
     @PostMapping(value = "/execute" ,
-            produces = {MediaType.APPLICATION_JSON_VALUE},
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Ejecutar proceso X" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
