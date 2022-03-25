@@ -26,4 +26,7 @@ public class ApplicationProperties {
     @Value("${swagger.info.contact.email}")
     private String contactEmail;
 
+    @Value("${application.process.name}")
+    private String processName;
+
 }

@@ -13,6 +13,10 @@ swagger:
 ---
 ###################################################
 #### PROFILE PROD ##################################
+application:
+  process:
+    name: ${ADMINBOOT_CLIENT_URL:PROCESS_DEFAULT}
+
 spring:
   profiles: prod
   application:
@@ -24,6 +28,10 @@ server:
 ---
 ###################################################
 #### PROFILE PROD - ADMIN BOOT ##################################
+application:
+  process:
+    name: ${ADMINBOOT_CLIENT_URL:PROCESS_DEFAULT}
+
 spring:
   profiles: prod_ab
   application:
@@ -36,10 +44,10 @@ spring:
         username: ${ADMINBOOT_CLIENT_USER}
         password: ${ADMINBOOT_CLIENT_PASSWORD}
 
-        instance:
-          management-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator
-          health-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator/health
-          service-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/
+        #instance:
+          #management-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator
+          #health-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/actuator/health
+          #service-url: ${ADMINBOOT_CLIENT_INSTANCE_HOST}/
 
 logging:
   file: logs-api/api-myapp-demo
@@ -62,6 +70,10 @@ server:
 ###################################################
 ###################### PROFILE DEV ####################
 ###################################################
+application:
+  process:
+    name: ${ADMINBOOT_CLIENT_URL:PROCESS_DEFAULT}
+
 spring:
   profiles: dev
   application:
