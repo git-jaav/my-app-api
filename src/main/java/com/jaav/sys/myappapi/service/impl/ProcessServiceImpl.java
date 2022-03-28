@@ -23,9 +23,13 @@ public class ProcessServiceImpl implements ProcessService {
         LocalDateTime fechaActual = LocalDateTime.now();
         String proceso = applicationProperties.getProcessName();
         return Arrays.asList(
-                new ProcessEntity(proceso + "01","OK",10,fechaActual),
-                new ProcessEntity(proceso + "02","OK",2,fechaActual),
-                new ProcessEntity(proceso + "03","OK",4,fechaActual)
+                ProcessEntity.builder()
+                        .proccesName(proceso + "01").status("ok").countOk(10).currentTime(fechaActual)
+                        .build(),
+                ProcessEntity.builder()
+                        .proccesName(proceso + "02").status("ok").countOk(2).currentTime(fechaActual).build(),
+                ProcessEntity.builder()
+                        .proccesName(proceso + "03").status("ok").countOk(4).currentTime(fechaActual).build()
         );
     }
 }

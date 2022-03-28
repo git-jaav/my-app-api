@@ -28,7 +28,7 @@ public class ProcessController {
     @Autowired
     ProcessService processService;
 
-    @PostMapping(value = "/execute" ,
+    @PostMapping(value = "/result" ,
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Ejecutar proceso X" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
