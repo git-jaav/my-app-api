@@ -56,28 +56,28 @@ public class ProcessController {
     }
 
 
-    /*@PostMapping(value = "/rx/execute" ,
-            produces = {MediaType.APPLICATION_JSON_VALUE},
-            consumes = MediaType.APPLICATION_JSON_VALUE )
-    @ApiOperation(value = "Ejecutar proceso X" ,
+    @GetMapping(value = "/stack" ,
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ApiOperation(value = "recuperar stack de service" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
-            //response = ProcessEntity[].class
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            response = ProcessEntity[].class, httpMethod = "GET" ,
+            notes = "stack", tags = "process"
     )
     @ApiResponses({
-            @ApiResponse( code = 200, message = "ok",response = ProcessEntity[].class),
+            @ApiResponse( code = 200, message = "ok",response = String[].class),
             @ApiResponse( code = 400, message = "BAD RQ",response = Exception.class)
     })
-    public ResponseEntity<List<ProcessEntity>> rxExecute(
-            @RequestParam(required = false, defaultValue = "") String type,
-            ServerHttpRequest httpRequest) {
+    public ResponseEntity<List<String>> getStack() {
         try {
-            return new ResponseEntity<List<ProcessEntity>>(
-                    proccesService.executeProcces(type), HttpStatus.OK);
+            logger.info("[INFO - PROCESS]::start get stack process");
+            return new ResponseEntity<>(
+                    processService.getStackProcess(), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
-            return new ResponseEntity<List<ProcessEntity>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }*/
+
+    }
 }

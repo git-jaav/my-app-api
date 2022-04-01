@@ -16,6 +16,11 @@ swagger:
 application:
   process:
     name: ${PROCESS_NAME:PROCESS_DEFAULT}
+    stack-another-service : ${ANOTHER_SERVICE:false}
+
+  http-client:
+    another-service:
+      url: ${SERVICE_URL:http://localhost:8080}
 
 spring:
   profiles: prod
@@ -31,6 +36,11 @@ server:
 application:
   process:
     name: ${PROCESS_NAME:PROCESS_DEFAULT}
+    stack-another-service : ${ANOTHER_SERVICE:false}
+
+  http-client:
+    another-service:
+      url: ${SERVICE_URL:http://localhost:8080}
 
 spring:
   profiles: prod_ab
@@ -73,11 +83,16 @@ server:
 application:
   process:
     name: ${PROCESS_NAME:PROCESS_DEFAULT}
+    stack-another-service : ${ANOTHER_SERVICE:false}
 
+  http-client:
+    another-service:
+      url: ${SERVICE_URL:http://localhost:8080}
 spring:
   profiles: dev
   application:
     name: myapp_demo
+
 
 server:
   port: ${vcap.application.port:8088}

@@ -20,4 +20,5 @@ public class ProcessEntity {
 
     private LocalDateTime currentTime;
 
+    private List<String> stackProcess;
 }

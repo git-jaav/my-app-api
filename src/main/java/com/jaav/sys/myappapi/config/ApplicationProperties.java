@@ -29,4 +29,8 @@ public class ApplicationProperties {
     @Value("${application.process.name:DEFAULT}")
     private String processName;
 
+    @Value("${application.process.stack-another-service:false}")
+    private boolean stackAnotherService;
+
+
 }
