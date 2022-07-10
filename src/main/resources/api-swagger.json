@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Spring Boot REST API - MYAPP-DEMO",
-    "version": "1.0",
-    "title": "SPRING BOOT - MYAPP-DEMO",
+    "description": "Api de rpueba basada en Spring boot",
+    "version": "1.0.0",
+    "title": "API DEMO",
     "termsOfService": "Terminos del servicio",
     "contact": {
       "name": "José Alfonso Arauco Villar - JAAV",
-      "url": "http://localhost:8081",
+      "url": "localhost:8080",
       "email": "araucovillar@gmail.com"
     },
     "license": {
@@ -15,25 +15,22 @@
       "url": "https://www.apache.org/licenses/LICENSE-2.0"
     }
   },
-  "host": "localhost:8081",
+  "host": "localhost:8088",
   "basePath": "/",
   "tags": [
     {
-      "name": "status-controller",
-      "description": "Status Controller"
-    },
-    {
-      "name": "procces-controller",
-      "description": "Procces Controller"
+      "name": "process-controller",
+      "description": "Process Controller"
     }
   ],
   "paths": {
-    "/api/channel/sys/v1/procces/execute": {
+    "/api/sys/v1/process/result": {
       "post": {
         "tags": [
-          "procces-controller"
+          "process"
         ],
         "summary": "Ejecutar proceso X",
+        "description": "Endpoint de muestra para obtener una entidad de un proceso X",
         "operationId": "executeUsingPOST",
         "consumes": [
           "application/json"
@@ -45,7 +42,7 @@
           {
             "name": "type",
             "in": "query",
-            "description": "type",
+            "description": "query param Tipo",
             "required": false,
             "type": "string"
           }
@@ -56,7 +53,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ProccesEntity"
+                "$ref": "#/definitions/ProcessEntity"
               }
             }
           },
@@ -81,13 +78,14 @@
         }
       }
     },
-    "/api/status/time": {
+    "/api/sys/v1/process/stack": {
       "get": {
         "tags": [
-          "status-controller"
+          "process"
         ],
-        "summary": "Verificar time",
-        "operationId": "getTimeUsingGET",
+        "summary": "recuperar stack de service",
+        "description": "stack",
+        "operationId": "getStackUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -98,45 +96,10 @@
           "200": {
             "description": "ok",
             "schema": {
-              "type": "string"
-            }
-          },
-          "400": {
-            "description": "BAD RQ",
-            "schema": {
-              "$ref": "#/definitions/Exception"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/api/status/verify": {
-      "get": {
-        "tags": [
-          "status-controller"
-        ],
-        "summary": "Verificar estado API",
-        "operationId": "verificarStatusUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "ok",
-            "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "400": {
@@ -185,19 +148,25 @@
         }
       }
     },
-    "ProccesEntity": {
+    "ProcessEntity": {
       "type": "object",
       "properties": {
-        "countError": {
-          "type": "integer",
-          "format": "int32"
-        },
         "countOk": {
           "type": "integer",
           "format": "int32"
         },
+        "currentTime": {
+          "type": "string",
+          "format": "date-time"
+        },
         "proccesName": {
           "type": "string"
+        },
+        "stackProcess": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "status": {
           "type": "string"
