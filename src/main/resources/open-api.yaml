@@ -1,0 +1,117 @@
+swagger: '2.0'
+info:
+  description: Api de rpueba basada en Spring boot
+  version: 1.0.0
+  title: API DEMO
+  termsOfService: Terminos del servicio
+  contact:
+    name: José Alfonso Arauco Villar - JAAV
+    url: localhost:8080
+    email: araucovillar@gmail.com
+  license:
+    name: Apache License Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+host: localhost:8088
+basePath: /
+tags:
+  - name: process-controller
+    description: Process Controller
+paths:
+  /api/sys/v1/process/execute:
+    post:
+      tags:
+        - process
+      summary: Ejecutar proceso X
+      description: Endpoint de muestra para obtener una entidad de un proceso X
+      operationId: executeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: type
+          in: query
+          description: query param Tipo
+          required: false
+          type: string
+      responses:
+        '200':
+          description: ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProcessEntity'
+        '201':
+          description: Created
+        '400':
+          description: BAD RQ
+          schema:
+            $ref: '#/definitions/Exception'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+definitions:
+  Exception:
+    type: object
+    properties:
+      cause:
+        $ref: '#/definitions/Throwable'
+      localizedMessage:
+        type: string
+      message:
+        type: string
+      stackTrace:
+        type: array
+        items:
+          $ref: '#/definitions/StackTraceElement'
+      suppressed:
+        type: array
+        items:
+          $ref: '#/definitions/Throwable'
+  ProcessEntity:
+    type: object
+    properties:
+      countOk:
+        type: integer
+        format: int32
+      currentTime:
+        type: string
+        format: date-time
+      proccesName:
+        type: string
+      status:
+        type: string
+  StackTraceElement:
+    type: object
+    properties:
+      className:
+        type: string
+      fileName:
+        type: string
+      lineNumber:
+        type: integer
+        format: int32
+      methodName:
+        type: string
+      nativeMethod:
+        type: boolean
+  Throwable:
+    type: object
+    properties:
+      cause:
+        $ref: '#/definitions/Throwable'
+      localizedMessage:
+        type: string
+      message:
+        type: string
+      stackTrace:
+        type: array
+        items:
+          $ref: '#/definitions/StackTraceElement'
+      suppressed:
+        type: array
+        items:
+          $ref: '#/definitions/Throwable'
